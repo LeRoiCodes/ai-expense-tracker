@@ -6,7 +6,7 @@ export const ContainerScroll = ({
   titleComponent,
   children,
 }) => {
-  const containerRef = useRef<any>(null);
+  const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
   });

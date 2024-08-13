@@ -2,6 +2,7 @@
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import React from "react";
+import Image from "next/image";
 
 const Hero = () => {
   return (
@@ -11,16 +12,16 @@ const Hero = () => {
           titleComponent={
             <>
               <h1 className="text-4xl font-semibold text-black dark:text-white">
-                Unleash the power of <br />
-                <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                  Scroll Animations
+              Take control of your finances with a personal AI-powered <br />
+                <span className="text-4xl md:text-[6rem] text-primary font-bold mt-1 leading-none">
+                   Finance assistant
                 </span>
               </h1>
             </>
           }
         >
           <Image
-            src={`/linear.webp`}
+            src={`/dashboard.png`}
             alt="hero"
             height={720}
             width={1400}
