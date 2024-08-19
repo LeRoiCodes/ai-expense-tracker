@@ -22,7 +22,7 @@ export const Header = () => {
           <Button variant="outline" className="rounded-full">Dashboard</Button>
         </Link>
         <Link href='/dashboard'>
-          <Button className="rounded-full ">Get started</Button>
+          <Button className="rounded-full text-white ">Get started</Button>
         </Link>
       </div>)}
     </div>

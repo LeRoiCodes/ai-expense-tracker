@@ -39,4 +39,4 @@ const DashboardLayout = ({ children }) => {
   )
 }
 
-export default layout
+export default DashboardLayout

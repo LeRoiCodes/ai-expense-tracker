@@ -1,9 +1,9 @@
 import React from 'react'
 
-const landing = () => {
+function loading() {
   return (
     <div>loading</div>
   )
 }
 
-export default landing
+export default loading

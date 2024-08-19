@@ -50,16 +50,16 @@ const SideNav = () => {
 
   return (
     <div className='h-screen p-5 border shadow-sm'>
-      <div className='flex flex-row items-center'>
+      <div className='flex flex-row items-center gap-1'>
         <Image src={'./logo-no-background.svg'} alt='logo' width={40} height={25} />
-        <span className={`text-primary font-bold text-xl`}></span>
+        <span className={`text-primary font-bold text-xl`}>LeRoiFinance</span>
       </div>
       <div className='mt-5'>
         {
           menuList.map((menu, index) => {
             return (
               <Link href={menu.path} key={index}>
-                <h2 className={`flex gap-2 items-center text-gray-500 font-medium mb-2 p-4 cursor-pointer rounded-full  hover:text-primary-foreground hover:bg-background ${path== menu.path && 'text-primary bg-background'}`}>
+                <h2 className={`flex gap-2 items-center text-gray-500 font-medium mb-2 p-4 cursor-pointer rounded-full  hover:text-primary-lighter hover:bg-primary-user ${path== menu.path && 'text-primary bg-primary-user'}`}>
                   <menu.icon />
                   {menu.name}
                 </h2>
@@ -76,5 +76,5 @@ const SideNav = () => {
   )
 }
 
-export default sideNav
+export default SideNav
 
