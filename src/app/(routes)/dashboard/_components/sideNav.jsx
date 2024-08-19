@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 
 
-const sideNav = () => {
+const SideNav = () => {
 
   const menuList = [
     {
