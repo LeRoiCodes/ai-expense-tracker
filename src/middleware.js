@@ -38,11 +38,18 @@
 //   ],
 // };
 
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default clerkMiddleware({
-  publicRoutes: [ '/'], // Include homepage as a public route
-});
+const isPublicRoute = createRouteMatcher(["/login(.*)", "/register(.*)", "/"]);
+
+export default clerkMiddleware((auth, req) => {
+    if (!isPublicRoute(req)) auth().protect();
+  });
+
+
+// export default clerkMiddleware({
+//   publicRoutes: [ '/'], // Include homepage as a public route
+// });
 
 export const config = {
   matcher: [
