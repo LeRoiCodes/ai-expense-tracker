@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import CardInfo from './_components/CardInfo'
 import { db } from '../../../../utils/dbConfig'
 import { getTableColumns } from 'drizzle-orm'
-import { Budgets } from '../../../../utils/schema'
+import { Budgets, Incomes, Expenses } from '../../../../utils/schema'
 // import CardInfo from './_components/CardInfo'
 
 
@@ -24,22 +24,45 @@ const Dashboard = () => {
   const getBudgetList = async () => {
     const result = await db.select({
       ...getTableColumns(Budgets),
-      totalSpend: sql`sum(${expenses.amount})`.mapWidth(Number),
-      totalItem: sql`count(${expense.id})`.mapWidth(Number)
-    }).from(Budgets).leftJoin(expenses, eq(Budgets.id, expenses.budgetId)).where(eq(Budgets.createdBy, user?.primaryEmailAddress.emailAddress)).groupBy(Budgets.id).orderBy(desc(Budgets.id))
+      totalSpend: sql`sum(${Expenses.amount})`.mapWidth(Number),
+      totalItem: sql`count(${Expenses.id})`.mapWidth(Number)
+    }).from(Budgets).leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId)).where(eq(Budgets.createdBy, user?.primaryEmailAddress.emailAddress)).groupBy(Budgets.id).orderBy(desc(Budgets.id))
 
     setBudgetList(result)
-    getAllExpenses()
+    getAllExpenses();
+    getIncomeList()
   }
 
-  const getAllExpenses = () => {}
+  const getAllExpenses = async () => {
+    const result = await db.select({
+      id:Expenses.id,
+      name: Expenses.name,
+      amount: Expenses.amount,
+      createdAt: Expenses.createdAt
+    }).from(Budgets).rightJoin(Expenses, eq(Budgets.id, Expenses.budgetId)).where(eq(Budgets.createdBy, user?.primaryEmailAddress.emailAddress)).orderBy(desc(Expenses.id))
+
+    setExpenseList(result)
+  }
+
+  const getIncomeList = async() => {
+    try {
+      const results = await db.select({
+        ...getTableColumns(Incomes),
+        totalAmount: sql`sum(cast(${Incomes.amount} as numeric))`.mapWidth(Number)
+      }).from(Incomes).groupBy(Incomes.id)
+
+      setIncomeList(results)
+    } catch (error) {
+      console.log(`Error fetching income list:` , error);
+    }
+  }
 
   return (
     <div className='p-8'>
       <h2 className='font-bold text-4xl'>Hi, {user?.fullName}</h2>
       <p>Here's what happening with your money. Let's manage your expenses</p>
 
-      <CardInfo budgetList={} incomeList={} />
+      <CardInfo budgetList={budgetList} incomeList={incomeList} />
     </div>
   )
 }
