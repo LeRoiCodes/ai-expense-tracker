@@ -63,6 +63,27 @@ const Dashboard = () => {
       <p>Here's what happening with your money. Let's manage your expenses</p>
 
       <CardInfo budgetList={budgetList} incomeList={incomeList} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 mt-6 gap-5">
+        <div className='lg:col-span-2'>
+          <BarChartDashboard budgetList={budgetList} />
+
+          <ExpenseListTable expenseList={expenseList} refreshData={() => getBudgetList()} />
+        </div>
+        <div className='grid gap-5'>
+          <h2 className='font-bold text-lg'>Latest Reports</h2>
+          {budgetList?.length > 0 ? budgetList.map((budget, index) => {
+            return(
+              <budgetItem budget={budget} key={index} />
+            )
+          }) : [1,2,3,4].map((items, index) => {
+            return(
+              <div className='h-[100px] w-full bg-slate-200 lg:animate-pulse'>
+
+              </div>
+            )})
+            }
+        </div>
+      </div>
     </div>
   )
 }
