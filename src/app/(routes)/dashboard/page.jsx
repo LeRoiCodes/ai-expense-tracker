@@ -6,6 +6,7 @@ import CardInfo from './_components/CardInfo'
 import { db } from '../../../../utils/dbConfig'
 import { getTableColumns } from 'drizzle-orm'
 import { Budgets, Incomes, Expenses } from '../../../../utils/schema'
+import BarChartDashboard from './_components/BarChartDashboard'
 // import CardInfo from './_components/CardInfo'
 
 
